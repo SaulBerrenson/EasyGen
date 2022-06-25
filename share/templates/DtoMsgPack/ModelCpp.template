@@ -1,0 +1,49 @@
+#include "{{class_name}}.hpp"
+
+
+namespace io {
+namespace codegen {
+namespace {{namespace_name}} {
+
+	{{class_name}}::{{class_name}}(){
+	{{#properties}}
+		m_{{property_name}} = {{{default_value}}};
+	{{/properties}}
+	}
+
+	std::vector<uint8_t> {{class_name}}::ToBinary() const
+	{
+		std::stringstream buffer;
+
+		msgpack::pack(buffer, *this);
+
+		const auto str = buffer.str();
+
+		std::vector<uint8_t> out_data(str.begin(), str.end());
+		
+		return out_data;
+	}
+
+	bool {{class_name}}::FromBinary(const std::vector<uint8_t>& data_in)
+	{
+		this->msgpack_unpack(msgpack::unpack(reinterpret_cast<const char*>(data_in.data()), data_in.size()).get());
+		return true;
+	}
+
+
+{{#properties}}
+	{{property_type}} io::codegen::{{namespace_name}}::{{class_name}}::get_{{property_name}}()  const
+	{
+		return m_{{property_name}};
+	}
+	
+	void io::codegen::{{namespace_name}}::{{class_name}}::set_{{property_name}}({{property_type}} {{property_name}}_in)
+	{
+		m_{{property_name}} = {{property_name}}_in;
+	} 	
+	
+{{/properties}}
+
+} // {{namespace_name}}
+} // codegen
+} // io

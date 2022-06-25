@@ -1,0 +1,62 @@
+#pragma once
+#ifndef {{class_name}}_H_
+#define {{class_name}}_H_
+
+#include <string>
+#include "IBinarySerializer.hpp"
+#include <msgpack.hpp>
+
+namespace io {
+namespace codegen {
+namespace {{namespace_name}} {
+
+class {{class_name}} : public io::codegen::{{namespace_name}}::IBinarySerializer {
+
+public:
+	{{class_name}}();
+	~{{class_name}}() override = default;
+
+{{#properties}}
+	{{property_type}} get_{{property_name}}() const;
+	
+	void set_{{property_name}}({{property_type}} {{property_name}}_in); 	
+	
+{{/properties}}
+
+    /*!
+     * @brief Serialization object to binary format
+     * @return byte array
+    */	
+	std::vector<uint8_t> ToBinary() const override;
+    /*!
+     * @brief Deserialization from binary format
+     * @param data_in byte array (serialized object)
+     * @return successful/unsuccessful operation
+    */
+    bool FromBinary(const std::vector<uint8_t>& data_in) override;
+
+
+	MSGPACK_DEFINE({{#properties}}m_{{property_name}}{{^last}}, {{/last}}{{/properties}});
+
+protected:
+{{#properties}}	
+	{{property_type}} m_{{property_name}};	
+{{/properties}}
+ 
+public:	
+	friend bool operator==(const {{class_name}}& lhs, const {{class_name}}& rhs)
+	{
+		return std::tie({{#properties}}lhs.m_{{property_name}}{{^last}}, {{/last}}{{/properties}}) == std::tie({{#properties}}rhs.m_{{property_name}}{{^last}}, {{/last}}{{/properties}});
+	}
+
+	friend bool operator!=(const {{class_name}}& lhs, const {{class_name}}& rhs)
+	{
+		return !(lhs == rhs);
+	} 
+}; 
+
+} // {{namespace_name}}
+} // codegen
+} // io
+
+#endif /* {{class_name}}_H_ */

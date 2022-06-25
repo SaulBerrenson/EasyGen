@@ -1,0 +1,30 @@
+cmake_minimum_required(VERSION 3.5)
+
+project(EasyGenContract)
+
+#minimal standart
+set(CMAKE_CXX_STANDARD 14)
+#auto export symbols on windows (if shared lib)
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
+find_package(msgpack CONFIG REQUIRED)
+find_package(Boost REQUIRED)
+
+FILE(GLOB_RECURSE HPP_FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp)
+FILE(GLOB_RECURSE SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
+
+add_library(${PROJECT_NAME}
+    ${HPP_FILES} 
+    ${SRC_FILES}
+)
+
+target_include_directories(${PROJECT_NAME} PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+target_link_libraries(${PROJECT_NAME}
+    msgpackc-cxx #binary serializer
+    Boost::boost
+)
