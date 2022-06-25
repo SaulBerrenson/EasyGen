@@ -21,7 +21,7 @@ add_definitions(-DBOOST_ALL_NO_LIB )
 
 find_package(mstch CONFIG REQUIRED)
 find_package(yaml-cpp CONFIG REQUIRED)
-find_package(Boost REQUIRED COMPONENTS filesystem)
+find_package(Boost REQUIRED COMPONENTS filesystem program_options)
 
 
 FILE(GLOB_RECURSE HPP_FILES ${CMAKE_CURRENT_SOURCE_DIR}/easygen/*.hpp)
@@ -41,6 +41,7 @@ mstch::mstch
 yaml-cpp
 Boost::boost
 Boost::filesystem
+Boost::program_options
 )
 
 #copy templates
