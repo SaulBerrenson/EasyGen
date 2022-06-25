@@ -48,6 +48,7 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 
+	std::cout << "use config: " << config_file.string() << std::endl;
 
 	if (!boost::filesystem::exists(config_file))
 	{
