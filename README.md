@@ -2,6 +2,8 @@
 ### Whats is it?
 Code generation tool for data transfer models (DTO) using IDL (very simple  yaml conf)
 
+## Goal
+automatization routine procedures by code filling getters, setters and make correct syntax, for example: serialization/deserialization
 
 ### Used
 * For generations - uses mustache generator.
