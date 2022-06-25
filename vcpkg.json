@@ -1,0 +1,11 @@
+{
+    "name": "main",
+    "version-semver": "1.0.0",
+    "dependencies": [
+      { "name": "mstch" } ,
+      { "name": "yaml-cpp" },
+      { "name": "boost"}
+    ],
+    "builtin-baseline":"c0d667ad6bb2d68890f33ded8b2e5bc182ab01fb"
+	 
+  }
