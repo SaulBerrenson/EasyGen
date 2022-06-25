@@ -7,6 +7,10 @@
 
 namespace easygen
 {
+	MsgPackCppGenerator::MsgPackCppGenerator(const std::vector<easygen::DataModelDescription>& models): AbstractGenerator(easygen::CppBaseTypes(), models)
+	{
+	}
+
 	std::vector<std::string> MsgPackCppGenerator::GenerateData(const boost::filesystem::path& output_dir)
 	{
 		boost::filesystem::path path_to_templates = easygen::io::get_path_to_template_dir() / "DtoMsgPack";
