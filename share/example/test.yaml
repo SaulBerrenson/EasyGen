@@ -1,0 +1,29 @@
+models:
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "int64"
+      username:
+        type: "string"
+      firstName:
+        type: "string"
+      lastName:
+        type: "string"
+      email:
+        type: "string"
+      password:
+        type: "string"
+      phone:
+        type: "bool"
+      userStatus:
+        type: "int32"
+        description: "User Status"
+  RegistredUser:
+    type: "object"
+    properties:
+      id:
+        type: "uint64"
+        description: "User ID"
+      phone:
+        type: "string"
