@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include <boost/filesystem.hpp>
 #include <boost/algorithm/string/case_conv.hpp>
 #include <mstch/mstch.hpp>
 
@@ -15,7 +16,7 @@ namespace easygen
 
 		virtual ~AbstractGenerator() = default;
 
-		virtual std::vector<std::string> GenerateData(const std::string& output_dir) = 0;
+		virtual std::vector<std::string> GenerateData(const boost::filesystem::path& output_dir) = 0;
 
 	protected:
 		PlatformType ConvertType(const std::string& data_type) const;
