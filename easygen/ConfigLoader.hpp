@@ -7,15 +7,14 @@ namespace easygen
 {
 	namespace io
 	{		
-       inline bool load_model_from_file(const std::string& path_to_config,
+       inline bool load_model_from_file(const boost::filesystem::path& path_to_config,
                                         std::vector<DataModelDescription>& models_out,
 										std::string& err_msg_out)
-       {
-		   boost::filesystem::path path_config(path_to_config);
+       {   
 
 		   if (!boost::filesystem::exists(path_to_config)) { err_msg_out = "file is not exist"; return false; };
 
-		   YAML::Node config = YAML::LoadFile(path_to_config);
+		   YAML::Node config = YAML::LoadFile(path_to_config.string());
 
 		   auto models = config["models"];
 
