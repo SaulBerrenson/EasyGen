@@ -1,11 +1,11 @@
 ﻿#pragma once
 #include <string>
 #include <vector>
+#include "DataModelDescription.hpp"
 
 namespace easygen
 {
-	/*fwd decl*/
-	struct DataModelDescription;
+
 
 	using ListDataModels = std::vector<DataModelDescription>;
 	using ErrorMsg = std::string;
