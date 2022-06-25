@@ -12,6 +12,6 @@ namespace easygen
 		{
 		}
 
-		std::vector<std::string> GenerateData(const std::string& output_dir) override;
+		std::vector<std::string> GenerateData(const boost::filesystem::path& output_dir) override;
 	};
 }

@@ -7,7 +7,7 @@
 
 namespace easygen
 {
-	std::vector<std::string> MsgPackCppGenerator::GenerateData(const std::string& output_dir)
+	std::vector<std::string> MsgPackCppGenerator::GenerateData(const boost::filesystem::path& output_dir)
 	{
 		boost::filesystem::path path_to_templates = easygen::io::get_path_to_template_dir() / "DtoMsgPack";
 
@@ -31,9 +31,8 @@ namespace easygen
 			boost::filesystem::load_string_file(cmake_template_path, cmake_template);
 		}
 
-		auto out_dir = boost::filesystem::path(output_dir);
-		auto include_dir = out_dir / "include";
-		auto src_dir = out_dir / "src";
+		auto include_dir = output_dir / "include";
+		auto src_dir = output_dir / "src";
 
 		if (!boost::filesystem::exists(boost::filesystem::path(output_dir)))
 			boost::filesystem::create_directories(boost::filesystem::path(output_dir));
@@ -81,7 +80,7 @@ namespace easygen
 			out.push_back(data_cpp);
 		}
 
-		boost::filesystem::save_string_file(out_dir / "CMakeLists.txt", cmake_template);
+		boost::filesystem::save_string_file(output_dir / "CMakeLists.txt", cmake_template);
 
 		return out;
 	}
